@@ -1498,6 +1498,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Falling Snow Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 261121308616929839, guid: 8d7100d4fef5641bab19038972a1d7b9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5735281297101001350, guid: 8d7100d4fef5641bab19038972a1d7b9, type: 3}
       propertyPath: moveWithTransform
       value: 1
@@ -2869,7 +2873,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730207238}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39222154, y: 0.05073871, z: -0.02167338, w: 0.9182147}
+  m_LocalRotation: {x: 0.3921917, y: 0.051985133, z: -0.022205794, w: 0.91814494}
   m_LocalPosition: {x: 907.02014, y: 11.55864, z: 341.9465}
   m_LocalScale: {x: 1, y: 1.0501, z: 1}
   m_ConstrainProportionsScale: 1
@@ -16090,6 +16094,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Falling Snow Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 261121308616929839, guid: 8d7100d4fef5641bab19038972a1d7b9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5735281297101001350, guid: 8d7100d4fef5641bab19038972a1d7b9, type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 5000
@@ -23205,7 +23213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786768629}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3922215, y: 0.050738707, z: -0.021673376, w: 0.9182147}
+  m_LocalRotation: {x: 0.3921917, y: 0.05198513, z: -0.02220579, w: 0.91814494}
   m_LocalPosition: {x: 907.02014, y: 11.55864, z: 341.9465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1

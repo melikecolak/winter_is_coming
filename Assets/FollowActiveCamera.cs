@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FollowActiveCamera : MonoBehaviour
 {
-    public float heightOffset = 100f;
+    public float heightOffset = 15f;
 
     void LateUpdate()
     {
