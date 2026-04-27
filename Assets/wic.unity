@@ -2779,8 +2779,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730207238}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39218903, y: 0.052096535, z: -0.02225338, w: 0.9181386}
-  m_LocalPosition: {x: 907.02014, y: 11.55864, z: 341.9465}
+  m_LocalRotation: {x: 0.44618833, y: 0.049216148, z: -0.024584107, w: 0.8932466}
+  m_LocalPosition: {x: 907.02014, y: 15.05864, z: 341.9465}
   m_LocalScale: {x: 1, y: 1.0501, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3216,7 +3216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2704630799553220512, guid: daf801234e310437a853e92c16435bde, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.27
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2704630799553220512, guid: daf801234e310437a853e92c16435bde, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23020,7 +23020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5d7c088409d9a40b7b09aa707777f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetOffset: {x: 0, y: 2.5, z: 0}
+  TargetOffset: {x: 0, y: 6, z: 0}
   TrackerSettings:
     BindingMode: 4
     PositionDamping: {x: 1, y: 1, z: 1}
@@ -23054,7 +23054,7 @@ MonoBehaviour:
   VerticalAxis:
     Value: 48
     Center: 48
-    Range: {x: -10, y: 60}
+    Range: {x: -25, y: 60}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -23122,8 +23122,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786768629}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.392189, y: 0.05209653, z: -0.02225338, w: 0.9181386}
-  m_LocalPosition: {x: 907.02014, y: 11.55864, z: 341.9465}
+  m_LocalRotation: {x: 0.4461883, y: 0.049216144, z: -0.024584103, w: 0.8932466}
+  m_LocalPosition: {x: 907.02014, y: 15.05864, z: 341.9465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -28184,6 +28184,7 @@ GameObject:
   - component: {fileID: 1831476390}
   - component: {fileID: 1831476392}
   - component: {fileID: 1831476391}
+  - component: {fileID: 1831476393}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -28230,9 +28231,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.9836426
-  m_Height: 4.1611705
+  m_Height: 4.701472
   m_Direction: 1
-  m_Center: {x: 0.1652832, y: 2.2571275, z: 0.29540706}
+  m_Center: {x: 0.1652832, y: 1.9869769, z: 0.29540706}
 --- !u!114 &1831476387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28240,7 +28241,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831476383}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfe03f28fccbf4a19a306de4e3de0f18, type: 3}
   m_Name: 
@@ -28332,6 +28333,36 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 730207241}
+--- !u!114 &1831476393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831476383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35918a08cb7d6402ca63764764601872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 9
+  sprintSpeed: 6
+  crouchSpeed: 2
+  jumpHeight: 1.2
+  gravityMultiplier: 2.5
+  airControl: 0.5
+  rotationSpeed: 10
+  speedDampTime: 0.1
+  crouchColliderHeight: 1.35
+  gravity: 0
+  normalColliderHeight: 0
+  normalCenter: {x: 0, y: 0, z: 0}
+  controller: {fileID: 0}
+  animator: {fileID: 0}
+  playerInput: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  playerVelocity: {x: 0, y: 0, z: 0}
+  playerModel: {fileID: 0}
 --- !u!1 &1841287586
 GameObject:
   m_ObjectHideFlags: 0
