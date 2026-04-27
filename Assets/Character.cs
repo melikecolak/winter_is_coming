@@ -1,0 +1,74 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Character : MonoBehaviour
+{
+    [Header("Hız")]
+    public float playerSpeed = 4f;
+    public float sprintSpeed = 6f;
+    public float crouchSpeed = 2f;
+    public float jumpHeight = 1.2f;
+    public float gravityMultiplier = 2.5f;
+    [Range(0f, 1f)] public float airControl = 0.5f;
+
+    [Header("Dönüş")]
+    public float rotationSpeed = 10f;
+
+    [Header("Animasyon")]
+    public float speedDampTime = 0.1f;
+
+    [Header("Çömelme")]
+    public float crouchColliderHeight = 1.35f;
+
+    [HideInInspector] public float gravity;
+    [HideInInspector] public float normalColliderHeight;
+    [HideInInspector] public Vector3 normalCenter;
+    [HideInInspector] public CharacterController controller;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public PlayerInput playerInput;
+    [HideInInspector] public Transform cameraTransform;
+    [HideInInspector] public Vector3 playerVelocity;
+    [HideInInspector] public Transform playerModel;
+
+    public StateMachine movementSM;
+    public StandingState standing;
+    public JumpingState jumping;
+    public LandingState landing;
+    public CrouchingState crouching;
+    public SprintingState sprinting;
+    public SprintJumpingState sprintJumping;
+
+    void Start()
+    {
+        controller     = GetComponent<CharacterController>();
+        animator       = GetComponentInChildren<Animator>();
+        playerInput    = GetComponent<PlayerInput>();
+        cameraTransform = Camera.main.transform;
+
+        normalColliderHeight = controller.height;
+        normalCenter         = controller.center;
+        gravity              = Physics.gravity.y * gravityMultiplier;
+        playerVelocity       = Vector3.zero;
+        playerModel          = animator.transform;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible   = false;
+
+        movementSM    = new StateMachine();
+        standing      = new StandingState(this, movementSM);
+        jumping       = new JumpingState(this, movementSM);
+        landing       = new LandingState(this, movementSM);
+        crouching     = new CrouchingState(this, movementSM);
+        sprinting     = new SprintingState(this, movementSM);
+        sprintJumping = new SprintJumpingState(this, movementSM);
+
+        movementSM.Initialize(standing);
+    }
+
+    void Update()
+    {
+        movementSM.currentState.HandleInput();
+        movementSM.currentState.LogicUpdate();
+        movementSM.currentState.PhysicsUpdate();
+    }
+}
