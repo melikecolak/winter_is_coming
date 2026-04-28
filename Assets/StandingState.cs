@@ -5,6 +5,7 @@ public class StandingState : State
     private bool jump;
     private bool crouch;
     private bool sprint;
+    private bool attack;
     private Vector2 inputVector;
     private Vector3 moveDirection;
     private float speedSmoothVel;
@@ -27,6 +28,7 @@ public class StandingState : State
         jump   = jumpAction.triggered;
         crouch = crouchAction.triggered;
         sprint = sprintAction.IsPressed() && inputVector.sqrMagnitude > 0.01f;
+        attack = attackAction.triggered;
     }
 
     public override void LogicUpdate()
@@ -43,6 +45,7 @@ public class StandingState : State
         if (jump)   { stateMachine.ChangeState(character.jumping);   return; }
         if (crouch) { stateMachine.ChangeState(character.crouching); return; }
         if (sprint) { stateMachine.ChangeState(character.sprinting); return; }
+        if (attack) { animator.SetTrigger("attack"); stateMachine.ChangeState(character.attacking); return; }
     }
 
     public override void PhysicsUpdate()
