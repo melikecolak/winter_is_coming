@@ -11,6 +11,7 @@ public class State
     protected InputAction jumpAction;
     protected InputAction crouchAction;
     protected InputAction sprintAction;
+    protected InputAction attackAction;
 
     public State(Character character, StateMachine stateMachine)
     {
@@ -22,6 +23,7 @@ public class State
         jumpAction   = map.FindAction("Jump");
         crouchAction = map.FindAction("Crouch");
         sprintAction = map.FindAction("Sprint");
+        attackAction = map.FindAction("Attack");
     }
 
     public virtual void Enter()         { Debug.Log("[State] " + GetType().Name); }

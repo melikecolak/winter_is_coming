@@ -37,6 +37,7 @@ public class Character : MonoBehaviour
     public CrouchingState crouching;
     public SprintingState sprinting;
     public SprintJumpingState sprintJumping;
+    public AttackState attacking;
 
     void Start()
     {
@@ -61,6 +62,7 @@ public class Character : MonoBehaviour
         crouching     = new CrouchingState(this, movementSM);
         sprinting     = new SprintingState(this, movementSM);
         sprintJumping = new SprintJumpingState(this, movementSM);
+        attacking     = new AttackState(this, movementSM);
 
         movementSM.Initialize(standing);
     }
