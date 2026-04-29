@@ -1,0 +1,69 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+/// <summary>
+/// Player nesnesine ekle. Health.onDeath event'ine otomatik abone olur.
+/// Inspector'da ragdollPrefab atanırsa ragdoll yolu, atanmazsa ölüm animasyonu + sahne yenileme yolu çalışır.
+/// </summary>
+public class PlayerDeathHandler : MonoBehaviour
+{
+    [Header("Ragdoll (opsiyonel — boş bırakılırsa animasyon yolu çalışır)")]
+    [SerializeField] GameObject ragdollPrefab;
+
+    [Header("Sahne Yenileme")]
+    [SerializeField] float reloadDelay = 3f;
+
+    Character   character;
+    Animator    animator;
+    bool        isDead;
+
+    void Awake()
+    {
+        character = GetComponent<Character>();
+        animator  = GetComponentInChildren<Animator>();
+
+        // Health.onDeath event'ine kod üzerinden abone ol (Inspector bağlantısına gerek yok)
+        var health = GetComponent<Health>();
+        if (health != null)
+            health.onDeath.AddListener(OnPlayerDeath);
+    }
+
+    public void OnPlayerDeath()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        // FSM'yi durdur (hareket, input yok)
+        if (character != null) character.enabled = false;
+
+        if (ragdollPrefab != null)
+        {
+            Instantiate(ragdollPrefab, transform.position, transform.rotation);
+            gameObject.SetActive(false);
+            StartCoroutine(ReloadScene());
+        }
+        else
+        {
+            // Animator'da "death" trigger + state varsa çalıştır, yoksa direkt yenile
+            if (animator != null && HasParameter("death", animator))
+                animator.SetTrigger("death");
+
+            StartCoroutine(ReloadScene());
+        }
+    }
+
+    IEnumerator ReloadScene()
+    {
+        yield return new WaitForSeconds(reloadDelay);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    // Animator'da parametre var mı kontrol et (hata almamak için)
+    static bool HasParameter(string paramName, Animator anim)
+    {
+        foreach (var p in anim.parameters)
+            if (p.name == paramName) return true;
+        return false;
+    }
+}

@@ -3,38 +3,48 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour, IDamageable
 {
-    [Header("Can Ayarları")]
+    [Header("Can")]
     public float maxHealth = 100f;
-    [SerializeField] private float currentHealth;
+    [SerializeField] float currentHealth;
 
-    [Header("Olaylar")]
+    [Header("VFX")]
+    [SerializeField] GameObject hitVFXPrefab;
+
+    [Header("Events")]
     public UnityEvent onDeath;
-    public UnityEvent<float, float> onHealthChanged; // current, max
+    public UnityEvent<float, float> onHealthChanged;
 
-    private bool isDead = false;
-    public bool IsDead => isDead;
+    Animator animator;
+    bool isDead;
+
+    public bool IsDead        => isDead;
     public float CurrentHealth => currentHealth;
-    public float MaxHealth => maxHealth;
+    public float MaxHealth     => maxHealth;
 
-    private void Awake()
+    void Awake()
     {
         currentHealth = maxHealth;
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void TakeDamage(float amount)
     {
         if (isDead) return;
-
         currentHealth = Mathf.Clamp(currentHealth - amount, 0f, maxHealth);
         onHealthChanged?.Invoke(currentHealth, maxHealth);
-
-        Debug.Log($"[Health] {gameObject.name} → {currentHealth}/{maxHealth}");
-
-        if (currentHealth <= 0f)
-            Die();
+        animator?.SetTrigger("damage");                    // Sorun 4: player damage animasyonu
+        CameraShake.Instance?.ShakeCamera(2f, 0.2f);      // Sorun 4: camera shake
+        if (currentHealth <= 0f) Die();
     }
 
-    private void Die()
+    public void HitVFX(Vector3 hitPosition)
+    {
+        if (hitVFXPrefab == null) return;
+        var vfx = Instantiate(hitVFXPrefab, hitPosition, Quaternion.identity);
+        Destroy(vfx, 3f);
+    }
+
+    void Die()
     {
         if (isDead) return;
         isDead = true;
