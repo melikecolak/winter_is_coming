@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class EnemyDamageDealer : MonoBehaviour
 {
-    [SerializeField] float     weaponLength = 1f;
+    [SerializeField] float     weaponRadius = 2.5f;
     [SerializeField] float     weaponDamage = 10f;
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask playerLayer = 1 << 8; // Layer 8 = Player
 
     bool canDealDamage;
     bool hasDealtDamage;
@@ -13,16 +13,18 @@ public class EnemyDamageDealer : MonoBehaviour
     {
         if (!canDealDamage || hasDealtDamage) return;
 
-        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, weaponLength, playerLayer))
+        var hits = Physics.OverlapSphere(transform.position, weaponRadius, playerLayer);
+        foreach (var col in hits)
         {
-            IDamageable target = hit.collider.GetComponent<IDamageable>()
-                              ?? hit.collider.GetComponentInParent<IDamageable>();
+            IDamageable target = col.GetComponent<IDamageable>()
+                              ?? col.GetComponentInParent<IDamageable>();
 
             if (target != null && !target.IsDead)
             {
                 target.TakeDamage(weaponDamage);
-                target.HitVFX(hit.point); // Fix 3: IDamageable interface üzerinden
+                target.HitVFX(transform.position);
                 hasDealtDamage = true;
+                return;
             }
         }
     }
@@ -35,9 +37,9 @@ public class EnemyDamageDealer : MonoBehaviour
 
     public void EndDealDamage() => canDealDamage = false;
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position - transform.up * weaponLength);
+        Gizmos.DrawWireSphere(transform.position, weaponRadius);
     }
 }

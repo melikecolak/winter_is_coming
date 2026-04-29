@@ -2779,7 +2779,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730207238}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.44561455, y: 0.0668812, z: -0.033408035, w: 0.89209783}
+  m_LocalRotation: {x: 0.44573793, y: 0.06350081, z: -0.031719483, w: 0.89234483}
   m_LocalPosition: {x: 1047.6602, y: 15.05864, z: 341.9465}
   m_LocalScale: {x: 1, y: 1.0501, z: 1}
   m_ConstrainProportionsScale: 1
@@ -23622,7 +23622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786768629}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.44561452, y: 0.066881195, z: -0.03340803, w: 0.89209783}
+  m_LocalRotation: {x: 0.44573787, y: 0.06350081, z: -0.031719476, w: 0.89234483}
   m_LocalPosition: {x: 1047.6602, y: 15.05864, z: 341.9465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -50613,7 +50613,8 @@ MonoBehaviour:
   ragdoll: {fileID: 0}
   attackCD: 3
   attackDuration: 1.5
-  attackRange: 2.5
+  attackRange: 3.5
+  hitMoment: 0.3
   aggroRange: 15
   rotationSpeed: 6
   stoppingDist: 2
