@@ -1,5 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2533176921895858280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 01e7502706f584c2d92f7f68a2124172, type: 3}
+  m_PrefabInstance: {fileID: 1365671663700735024}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1547389275577750491}
+  m_Layer: 0
+  m_Name: 'ego_karakter2@Standing Idle (Missing Prefab with guid: 01e7502706f584c2d92f7f68a2124172)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1547389275577750491
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 01e7502706f584c2d92f7f68a2124172, type: 3}
+  m_PrefabInstance: {fileID: 1365671663700735024}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2533176921895858280}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2704630799553220512}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2814701985326246193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f259e8c0f6a44c00b454852ef6b436f, type: 3}
+  m_PrefabInstance: {fileID: 119471685405253331}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 442139601892636984}
+  m_Layer: 0
+  m_Name: 'ego_karakter2@Happy Idle (Missing Prefab with guid: 9f259e8c0f6a44c00b454852ef6b436f)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &442139601892636984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9f259e8c0f6a44c00b454852ef6b436f, type: 3}
+  m_PrefabInstance: {fileID: 119471685405253331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2814701985326246193}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2704630799553220512}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3710961965362684368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5e6d92dba7d9e4668ba69ee5799d1644, type: 3}
+  m_PrefabInstance: {fileID: 7801062341653239874}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7766538523143208873}
+  m_Layer: 0
+  m_Name: 'ego_karakter2@Great Sword Attack (Missing Prefab with guid: 5e6d92dba7d9e4668ba69ee5799d1644)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7766538523143208873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5e6d92dba7d9e4668ba69ee5799d1644, type: 3}
+  m_PrefabInstance: {fileID: 7801062341653239874}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3710961965362684368}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2704630799553220512}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &119471685405253331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57,11 +150,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f259e8c0f6a44c00b454852ef6b436f, type: 3}
---- !u!4 &442139601892636984 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9f259e8c0f6a44c00b454852ef6b436f, type: 3}
-  m_PrefabInstance: {fileID: 119471685405253331}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1365671663700735024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,11 +207,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01e7502706f584c2d92f7f68a2124172, type: 3}
---- !u!4 &1547389275577750491 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 01e7502706f584c2d92f7f68a2124172, type: 3}
-  m_PrefabInstance: {fileID: 1365671663700735024}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2450659808539191371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -264,8 +347,3 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e6d92dba7d9e4668ba69ee5799d1644, type: 3}
---- !u!4 &7766538523143208873 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5e6d92dba7d9e4668ba69ee5799d1644, type: 3}
-  m_PrefabInstance: {fileID: 7801062341653239874}
-  m_PrefabAsset: {fileID: 0}

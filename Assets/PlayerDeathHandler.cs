@@ -34,7 +34,6 @@ public class PlayerDeathHandler : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        // FSM'yi durdur (hareket, input yok)
         if (character != null) character.enabled = false;
 
         if (ragdollPrefab != null)
@@ -45,7 +44,6 @@ public class PlayerDeathHandler : MonoBehaviour
         }
         else
         {
-            // Animator'da "death" trigger + state varsa çalıştır, yoksa direkt yenile
             if (animator != null && HasParameter("death", animator))
                 animator.SetTrigger("death");
 

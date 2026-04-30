@@ -31,11 +31,16 @@ public class EnemyDamageDealer : MonoBehaviour
 
     public void StartDealDamage()
     {
-        canDealDamage  = true;
-        hasDealtDamage = false;
+        canDealDamage = true;
+        // hasDealtDamage'ı burada sıfırlama — çift hasar önleme
+        // Sıfırlama sadece EndDealDamage'da yapılıyor
     }
 
-    public void EndDealDamage() => canDealDamage = false;
+    public void EndDealDamage()
+    {
+        canDealDamage  = false;
+        hasDealtDamage = false;
+    }
 
     void OnDrawGizmosSelected()
     {
