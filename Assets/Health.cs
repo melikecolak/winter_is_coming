@@ -32,9 +32,9 @@ public class Health : MonoBehaviour, IDamageable
         if (isDead) return;
         currentHealth = Mathf.Clamp(currentHealth - amount, 0f, maxHealth);
         onHealthChanged?.Invoke(currentHealth, maxHealth);
-        animator?.SetTrigger("damage");                    // Sorun 4: player damage animasyonu
-        CameraShake.Instance?.ShakeCamera(2f, 0.2f);      // Sorun 4: camera shake
-        if (currentHealth <= 0f) Die();
+        CameraShake.Instance?.ShakeCamera(2f, 0.2f);
+        if (currentHealth <= 0f) { Die(); return; }
+        animator?.SetTrigger("damage");
     }
 
     public void HitVFX(Vector3 hitPosition)

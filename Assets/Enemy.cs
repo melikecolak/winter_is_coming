@@ -176,7 +176,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (ragdoll != null)
         {
             var r = Instantiate(ragdoll, transform.position, transform.rotation);
-            Destroy(r, 4f);
+            Destroy(r, 7f);
             Destroy(gameObject);
         }
         else
@@ -186,7 +186,7 @@ public class Enemy : MonoBehaviour, IDamageable
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             animator.SetTrigger("death");
-            Destroy(gameObject, 6.2f);
+            Destroy(gameObject, 9.2f);
         }
     }
 
