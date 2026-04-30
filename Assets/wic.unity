@@ -2743,7 +2743,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730207238}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4461844, y: 0.049358588, z: -0.024655258, w: 0.8932387}
+  m_LocalRotation: {x: 0.44628957, y: 0.045385785, z: -0.022670792, w: 0.8934494}
   m_LocalPosition: {x: 1047.6602, y: 15.05864, z: 341.9465}
   m_LocalScale: {x: 1, y: 1.0501, z: 1}
   m_ConstrainProportionsScale: 1
@@ -21470,7 +21470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786768629}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.44618434, y: 0.049358577, z: -0.02465525, w: 0.8932387}
+  m_LocalRotation: {x: 0.4462896, y: 0.045385785, z: -0.02267079, w: 0.89344937}
   m_LocalPosition: {x: 1047.6602, y: 15.05864, z: 341.9465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -26717,7 +26717,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.5
 --- !u!114 &1831476395
 MonoBehaviour:
@@ -36924,6 +36924,7 @@ GameObject:
   - component: {fileID: 9221993081519457553}
   - component: {fileID: 9221993081519457554}
   - component: {fileID: 9221993081519457555}
+  - component: {fileID: 9221993081519457556}
   m_Layer: 6
   m_Name: character_5
   m_TagString: Untagged
@@ -48467,6 +48468,33 @@ CapsuleCollider:
   m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &9221993081519457556
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472728674791474637}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
