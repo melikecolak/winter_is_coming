@@ -38,9 +38,10 @@ public class PlayerDeathHandler : MonoBehaviour
 
         if (ragdollPrefab != null)
         {
-            Instantiate(ragdollPrefab, transform.position, transform.rotation);
+            var r = Instantiate(ragdollPrefab, transform.position, transform.rotation);
+            Destroy(r, reloadDelay);
+            StartCoroutine(ReloadScene()); // SetActive(false) öncesinde başlat
             gameObject.SetActive(false);
-            StartCoroutine(ReloadScene());
         }
         else
         {
