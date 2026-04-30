@@ -29,6 +29,7 @@ public class DamageDealer : MonoBehaviour
             if (target != null && !target.IsDead)
             {
                 target.TakeDamage(weaponDamage);
+                target.HitVFX(hit.point);
                 hasDealtDamage.Add(hit.transform.gameObject);
             }
         }
