@@ -115,7 +115,11 @@ public class Enemy : MonoBehaviour, IDamageable
     IEnumerator AttackResetFallback()
     {
         yield return new WaitForSeconds(attackDuration);
-        if (isAttacking) ResumeAfterAttack();
+        if (isAttacking)
+        {
+            GetComponentInChildren<EnemyDamageDealer>()?.EndDealDamage();
+            ResumeAfterAttack();
+        }
     }
 
     void SmoothRotateTowardPlayer()
@@ -168,21 +172,21 @@ public class Enemy : MonoBehaviour, IDamageable
     void Die()
     {
         StopAllCoroutines();
-        agent.isStopped = true;
-        agent.ResetPath();
 
         if (ragdoll != null)
         {
-            Instantiate(ragdoll, transform.position, transform.rotation);
+            var r = Instantiate(ragdoll, transform.position, transform.rotation);
+            Destroy(r, 4f);
             Destroy(gameObject);
         }
         else
         {
-            var ice = GetComponent<IceShatterEffect>();
-            if (ice != null) ice.Shatter();
-            var smr = GetComponentInChildren<SkinnedMeshRenderer>();
-            if (smr != null) smr.enabled = false;
-            Destroy(gameObject, 5f);
+            // Ragdoll atanmamışsa eski yol: death animasyonu + gecikmiş destroy
+            agent.isStopped = true;
+            agent.enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+            animator.SetTrigger("death");
+            Destroy(gameObject, 6.2f);
         }
     }
 
