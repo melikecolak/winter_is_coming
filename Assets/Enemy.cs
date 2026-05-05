@@ -15,27 +15,26 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] float aggroRange     = 15f;
     [SerializeField] float rotationSpeed  = 6f;
     [SerializeField] float stoppingDist   = 2f;
-    [SerializeField] float minSeparation  = 1.2f; // içinden geçmeyi önleyen minimum mesafe
 
     public bool IsDead => health <= 0;
 
-    GameObject        player;
-    NavMeshAgent      agent;
-    Animator          animator;
-    CharacterController playerCC;
-    float             attackTimer;
-    float             destTimer = 0.5f;
-    bool              isAttacking;
+    GameObject   player;
+    NavMeshAgent agent;
+    Animator     animator;
+    float        attackTimer;
+    float        destTimer = 0.5f;
+    bool         isAttacking;
 
     void Start()
     {
         agent    = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         player   = GameObject.FindGameObjectWithTag("Player");
-        playerCC = player?.GetComponent<CharacterController>();
 
-        agent.updateRotation   = false;
-        agent.stoppingDistance = stoppingDist;
+        agent.updateRotation      = false;
+        agent.stoppingDistance    = stoppingDist;
+        agent.radius              = 0.5f;
+        agent.avoidancePriority   = Random.Range(30, 70);
     }
 
     void Update()
@@ -45,9 +44,6 @@ public class Enemy : MonoBehaviour, IDamageable
         float dist = Vector3.Distance(player.transform.position, transform.position);
 
         animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
-
-        // Düşmanın player'ın içine girmesini kodla önle
-        PreventOverlap();
 
         if (dist <= aggroRange)
         {
@@ -72,6 +68,7 @@ public class Enemy : MonoBehaviour, IDamageable
                 else
                 {
                     agent.isStopped = true;
+                    agent.ResetPath();
                 }
             }
         }
@@ -81,26 +78,6 @@ public class Enemy : MonoBehaviour, IDamageable
             agent.ResetPath();
             destTimer = 0.5f;
         }
-    }
-
-    // Her iki tarafı da iter: enemy transform + player CharacterController
-    void PreventOverlap()
-    {
-        Vector3 diff = transform.position - player.transform.position;
-        diff.y = 0f;
-        float dist = diff.magnitude;
-
-        if (dist >= minSeparation || dist < 0.01f) return;
-
-        float overlap    = minSeparation - dist;
-        Vector3 pushDir  = diff.normalized;
-
-        // Düşmanı ağırlıklı geri it (NavMesh sorumluluğu)
-        transform.position += pushDir * (overlap * 0.6f);
-        agent.nextPosition  = transform.position;
-
-        // Player CharacterController'ı hafifçe geri it
-        playerCC?.Move(pushDir * -(overlap * 0.4f));
     }
 
     void StartAttack()
@@ -196,7 +173,5 @@ public class Enemy : MonoBehaviour, IDamageable
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, aggroRange);
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, minSeparation);
     }
 }
