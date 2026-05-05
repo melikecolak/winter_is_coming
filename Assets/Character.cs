@@ -72,33 +72,5 @@ public class Character : MonoBehaviour
         movementSM.currentState.HandleInput();
         movementSM.currentState.LogicUpdate();
         movementSM.currentState.PhysicsUpdate();
-        DiagnosticLog();
     }
-
-    // GECICI DIAGNOSTIC — CollisionDiagnostic.cs ile birlikte sil.
-    GameObject  _diagNPC;
-    int         _diagFrame;
-    void DiagnosticLog()
-    {
-        if (_diagNPC == null)
-            _diagNPC = GameObject.FindGameObjectWithTag("Enemy");
-        if (_diagNPC == null) return;
-
-        float dist = Vector3.Distance(transform.position, _diagNPC.transform.position);
-        if (dist > 2.5f) return;
-
-        _diagFrame++;
-        var flags = controller.collisionFlags;
-        Debug.Log(
-            $"[PLR #{_diagFrame:D4}] " +
-            $"pos={V(transform.position)} | " +
-            $"cc.vel={V(controller.velocity)} | " +
-            $"cc.collFlags={flags} | " +
-            $"cc.grounded={controller.isGrounded} | " +
-            $"state={movementSM.currentState.GetType().Name} | " +
-            $"dist={dist:F3}"
-        );
-    }
-
-    static string V(Vector3 v) => $"({v.x:F3},{v.y:F3},{v.z:F3})";
 }
