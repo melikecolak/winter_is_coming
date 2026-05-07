@@ -119,7 +119,7 @@ public class Enemy : MonoBehaviour, IDamageable
     // ── Animation Events ────────────────────────────────────────────────
 
     public void StartDealDamage() =>
-        GetComponentInChildren<EnemyDamageDealer>()?.StartDealDamage();
+        GetComponentInChildren<EnemyDamageDealer>()?.StartDealDamage(attackRange);
 
     public void EndDealDamage()
     {
