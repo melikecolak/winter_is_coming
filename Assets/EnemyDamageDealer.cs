@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class EnemyDamageDealer : MonoBehaviour
 {
-    [SerializeField] float     weaponRadius = 2.5f;
     [SerializeField] float     weaponDamage = 10f;
     [SerializeField] LayerMask playerLayer = 1 << 8; // Layer 8 = Player
 
-    bool canDealDamage;
-    bool hasDealtDamage;
+    float weaponRadius;
+    bool  canDealDamage;
+    bool  hasDealtDamage;
 
     void Update()
     {
@@ -29,11 +29,10 @@ public class EnemyDamageDealer : MonoBehaviour
         }
     }
 
-    public void StartDealDamage()
+    public void StartDealDamage(float range)
     {
+        weaponRadius  = range;
         canDealDamage = true;
-        // hasDealtDamage'ı burada sıfırlama — çift hasar önleme
-        // Sıfırlama sadece EndDealDamage'da yapılıyor
     }
 
     public void EndDealDamage()
