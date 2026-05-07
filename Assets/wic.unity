@@ -1632,7 +1632,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -1656,7 +1656,7 @@ MonoBehaviour:
   attackRange: 3.5
   aggroRange: 15
   rotationSpeed: 6
-  stoppingDist: 2
+  stoppingDist: 2.2
 --- !u!195 &325736942
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4386,7 +4386,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -4410,7 +4410,7 @@ MonoBehaviour:
   attackRange: 3.5
   aggroRange: 15
   rotationSpeed: 6
-  stoppingDist: 2
+  stoppingDist: 2.2
 --- !u!195 &1012307965
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -15173,7 +15173,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -15197,7 +15197,7 @@ MonoBehaviour:
   attackRange: 3.5
   aggroRange: 15
   rotationSpeed: 6
-  stoppingDist: 2
+  stoppingDist: 2.2
 --- !u!195 &1357343754
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -16136,7 +16136,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -16160,7 +16160,7 @@ MonoBehaviour:
   attackRange: 3.5
   aggroRange: 15
   rotationSpeed: 6
-  stoppingDist: 2
+  stoppingDist: 2.2
 --- !u!195 &1558969006
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -27119,7 +27119,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.8
-  m_Radius: 0.3
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -35753,7 +35753,7 @@ MonoBehaviour:
   attackRange: 3.5
   aggroRange: 15
   rotationSpeed: 6
-  stoppingDist: 2
+  stoppingDist: 2.2
 --- !u!136 &9221993081519457555
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -35773,7 +35773,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
