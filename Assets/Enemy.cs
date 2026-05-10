@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         agent.updateRotation      = false;
         agent.stoppingDistance    = stoppingDist;
-        agent.radius              = 0.5f;
+        agent.radius              = 0.7f;
         agent.avoidancePriority   = Random.Range(30, 70);
     }
 
