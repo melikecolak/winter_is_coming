@@ -59,11 +59,6 @@ Assets/AN Interactive Physical Door Pack/Scripts/
  AN_PlugScript.cs
 Assets/
  Animations/Kevin Iglesias/Human Animations/Scripts/SpineProxy.cs
- AttackState.cs
- CameraShake.cs
- Character.cs
- CombatAnimationEvents.cs
- CrouchingState.cs
  damage.cs
  DamageDealer.cs
  DamageStateLogger.cs
@@ -122,6 +117,13 @@ Assets/
   ThirdPersonFollowCameraSideSwapper.cs
   TurnAroundPlayer.cs
   WrapAround.cs
+ Scripts/
+  AttackState.cs
+  CameraShake.cs
+  Character.cs
+  CombatAnimationEvents.cs
+  CrouchingState.cs
+  UI/HealthBarUI.cs
  SprintingState.cs
  SprintJumpingState.cs
  StandingState.cs
@@ -386,9 +388,6 @@ Library/PackageCache/
  com.unity.nuget.mono-cecil@d78732e851eb/Mono.Cecil.dll
  com.unity.visualscripting@6279e2b7c485/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll
 Library/ScriptAssemblies/
- glTFast.dll
- glTFast.dots.dll
- glTFast.Editor.dll
  PPv2URPConverters.dll
  Unity.AI.Navigation.dll
  Unity.AI.Navigation.Editor.ConversionSystem.dll

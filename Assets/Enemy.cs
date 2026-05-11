@@ -33,7 +33,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
         agent.updateRotation      = false;
         agent.stoppingDistance    = stoppingDist;
-        agent.radius              = 0.7f;
         agent.avoidancePriority   = Random.Range(30, 70);
     }
 
@@ -85,6 +84,7 @@ public class Enemy : MonoBehaviour, IDamageable
         attackTimer     = 0f;
         isAttacking     = true;
         agent.isStopped = true;
+        agent.ResetPath();
         animator.SetTrigger("attack");
         StartCoroutine(AttackResetFallback());
     }
