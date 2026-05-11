@@ -1836,7 +1836,7 @@ MonoBehaviour:
   attackRange: 3.5
   aggroRange: 15
   rotationSpeed: 6
-  stoppingDist: 2.2
+  stoppingDist: 3.1
 --- !u!195 &325736942
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3087,7 +3087,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730207238}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.44617614, y: 0.049659356, z: -0.0248055, w: 0.89322203}
+  m_LocalRotation: {x: 0.44630694, y: 0.044698562, z: -0.022327516, w: 0.89348406}
   m_LocalPosition: {x: 1047.6602, y: 15.05864, z: 341.9465}
   m_LocalScale: {x: 1, y: 1.0501, z: 1}
   m_ConstrainProportionsScale: 1
@@ -4740,7 +4740,7 @@ MonoBehaviour:
   attackRange: 3.5
   aggroRange: 15
   rotationSpeed: 6
-  stoppingDist: 2.2
+  stoppingDist: 3.1
 --- !u!195 &1012307965
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -15527,7 +15527,7 @@ MonoBehaviour:
   attackRange: 3.5
   aggroRange: 15
   rotationSpeed: 6
-  stoppingDist: 2.2
+  stoppingDist: 3.1
 --- !u!195 &1357343754
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -16592,7 +16592,7 @@ MonoBehaviour:
   attackRange: 3.5
   aggroRange: 15
   rotationSpeed: 6
-  stoppingDist: 2.2
+  stoppingDist: 3.1
 --- !u!195 &1558969006
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -22448,7 +22448,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786768629}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.44617608, y: 0.049659345, z: -0.024805492, w: 0.89322203}
+  m_LocalRotation: {x: 0.44630688, y: 0.044698566, z: -0.022327518, w: 0.89348406}
   m_LocalPosition: {x: 1047.6602, y: 15.05864, z: 341.9465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -36328,7 +36328,7 @@ MonoBehaviour:
   attackRange: 3.5
   aggroRange: 15
   rotationSpeed: 6
-  stoppingDist: 2.2
+  stoppingDist: 3.1
 --- !u!136 &9221993081519457555
 CapsuleCollider:
   m_ObjectHideFlags: 0

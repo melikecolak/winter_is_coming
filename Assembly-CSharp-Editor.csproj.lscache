@@ -315,18 +315,17 @@ Temp/obj/Assembly-CSharp-Editor/.NETStandard,Version=v2.1.AssemblyAttributes.cs
  System.Transactions.dll
  System.Xml.dll
  System.Xml.Linq.dll
+Library/PackageCache/com.unity.collab-proxy@e566cd3e7623/Lib/Editor/
+ log4netPlastic.dll
+ Unity.Plastic.Antlr3.Runtime.dll
+ Unity.Plastic.Newtonsoft.Json.dll
+ unityplastic.dll
+Library/PackageCache/com.unity.collections@aea9d3bd5e19/
+ Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll
+ Unity.Collections.Tests/
+  System.IO.Hashing/System.IO.Hashing.dll
+  System.Runtime.CompilerServices.Unsafe/System.Runtime.CompilerServices.Unsafe.dll
 Library/PackageCache/
- com.coplaydev.coplay@8fc764ffc1d3/Editor/Unity-v2022.3/Coplay-v8.17.2.dll
- com.unity.collab-proxy@e566cd3e7623/Lib/Editor/
-  log4netPlastic.dll
-  Unity.Plastic.Antlr3.Runtime.dll
-  Unity.Plastic.Newtonsoft.Json.dll
-  unityplastic.dll
- com.unity.collections@aea9d3bd5e19/
-  Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll
-  Unity.Collections.Tests/
-   System.IO.Hashing/System.IO.Hashing.dll
-   System.Runtime.CompilerServices.Unsafe/System.Runtime.CompilerServices.Unsafe.dll
  com.unity.ext.nunit@031a54704bff/net40/unity-custom/nunit.framework.dll
  com.unity.nuget.mono-cecil@d78732e851eb/Mono.Cecil.dll
  com.unity.visualscripting@6279e2b7c485/Editor/VisualScripting.Core/Dependencies/
@@ -336,9 +335,6 @@ Library/PackageCache/
   Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll
   Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll
 Library/ScriptAssemblies/
- glTFast.dll
- glTFast.dots.dll
- glTFast.Editor.dll
  PPv2URPConverters.dll
  Unity.AI.Navigation.dll
  Unity.AI.Navigation.Editor.ConversionSystem.dll
