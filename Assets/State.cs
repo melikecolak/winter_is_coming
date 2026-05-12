@@ -58,4 +58,31 @@ public class State
         right.y   = 0f; right.Normalize();
         return (forward * input.y + right * input.x).normalized;
     }
+
+    protected void TickFootstep(float interval, Vector3 moveDirection)
+    {
+        character.stepTimer -= Time.deltaTime;
+        if (character.stepTimer > 0f) return;
+
+        if (moveDirection.sqrMagnitude < 0.01f)
+        {
+            character.stepTimer = interval;
+            return;
+        }
+        if (character.footstepClip == null || character.audioSource == null)
+        {
+            character.stepTimer = interval;
+            return;
+        }
+
+        Vector3 origin = character.transform.position + Vector3.up * 0.1f;
+        if (!Physics.Raycast(origin, Vector3.down, 0.4f, character.groundLayer))
+        {
+            character.stepTimer = interval;
+            return;
+        }
+
+        character.audioSource.PlayOneShot(character.footstepClip);
+        character.stepTimer = interval;
+    }
 }
