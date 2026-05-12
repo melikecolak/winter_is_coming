@@ -20,6 +20,12 @@ public class Character : MonoBehaviour
     [Header("Çömelme")]
     public float crouchColliderHeight = 1.35f;
 
+    [Header("Ayak Sesi")]
+    public AudioClip footstepClip;
+    public float walkStepInterval   = 0.15f;
+    public float sprintStepInterval = 0.1f;
+    public LayerMask groundLayer;
+
     [HideInInspector] public float gravity;
     [HideInInspector] public float normalColliderHeight;
     [HideInInspector] public Vector3 normalCenter;
@@ -29,6 +35,8 @@ public class Character : MonoBehaviour
     [HideInInspector] public Transform cameraTransform;
     [HideInInspector] public Vector3 playerVelocity;
     [HideInInspector] public Transform playerModel;
+    [HideInInspector] public AudioSource audioSource;
+    [HideInInspector] public float stepTimer;
 
     public StateMachine movementSM;
     public StandingState standing;
@@ -41,10 +49,11 @@ public class Character : MonoBehaviour
 
     void Start()
     {
-        controller     = GetComponent<CharacterController>();
-        animator       = GetComponentInChildren<Animator>();
-        playerInput    = GetComponent<PlayerInput>();
+        controller      = GetComponent<CharacterController>();
+        animator        = GetComponentInChildren<Animator>();
+        playerInput     = GetComponent<PlayerInput>();
         cameraTransform = Camera.main.transform;
+        audioSource     = GetComponent<AudioSource>();
 
         normalColliderHeight = controller.height;
         normalCenter         = controller.center;

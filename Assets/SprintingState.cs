@@ -51,6 +51,7 @@ public class SprintingState : State
         character.controller.Move(moveDirection * character.sprintSpeed * Time.deltaTime);
         ApplyGravity();
         RotateTowardMovement(moveDirection);
+        TickFootstep(character.sprintStepInterval, moveDirection);
     }
 
     public override void Exit()

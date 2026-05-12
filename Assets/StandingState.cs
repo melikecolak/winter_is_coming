@@ -54,6 +54,7 @@ public class StandingState : State
         character.controller.Move(moveDirection * character.playerSpeed * Time.deltaTime);
         ApplyGravity();
         RotateTowardMovement(moveDirection);
+        TickFootstep(character.walkStepInterval, moveDirection);
     }
 
     public override void Exit()
