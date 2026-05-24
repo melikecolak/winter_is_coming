@@ -25,6 +25,9 @@ public class Enemy : MonoBehaviour, IDamageable
     float        destTimer = 0.5f;
     bool         isAttacking;
 
+    void OnEnable()  => GameEvents.OnPlayerDied += OnPlayerDied;
+    void OnDisable() => GameEvents.OnPlayerDied -= OnPlayerDied;
+
     void Start()
     {
         agent    = GetComponent<NavMeshAgent>();
@@ -114,6 +117,27 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         isAttacking     = false;
         agent.isStopped = false;
+    }
+
+    // ── Player Death Event ───────────────────────────────────────────────
+
+    void OnPlayerDied()
+    {
+        if (IsDead) return;
+
+        // Stop any in-progress attack coroutine and damage window.
+        StopAllCoroutines();
+        GetComponentInChildren<EnemyDamageDealer>()?.EndDealDamage();
+        isAttacking     = false;
+        agent.isStopped = true;
+        agent.ResetPath();
+        animator.SetFloat("speed", 0f);
+        animator.ResetTrigger("attack");
+
+        // TODO (multiplayer): call FindNextTarget() here instead of nulling player.
+        // FindNextTarget() should scan for other living players and assign one;
+        // only go idle when none remain.
+        player = null;
     }
 
     // ── Animation Events ────────────────────────────────────────────────
