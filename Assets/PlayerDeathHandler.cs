@@ -36,6 +36,9 @@ public class PlayerDeathHandler : MonoBehaviour
 
         if (character != null) character.enabled = false;
 
+        // Notify all NPCs so they stop targeting this player immediately.
+        GameEvents.RaisePlayerDied();
+
         if (ragdollPrefab != null)
         {
             var r = Instantiate(ragdollPrefab, transform.position, transform.rotation);
