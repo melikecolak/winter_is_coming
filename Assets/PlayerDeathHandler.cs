@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Player nesnesine ekle. Health.onDeath event'ine otomatik abone olur.
@@ -43,7 +42,7 @@ public class PlayerDeathHandler : MonoBehaviour
         {
             var r = Instantiate(ragdollPrefab, transform.position, transform.rotation);
             Destroy(r, reloadDelay);
-            StartCoroutine(ReloadScene()); // SetActive(false) öncesinde başlat
+            StartCoroutine(TriggerGameOver());
             gameObject.SetActive(false);
         }
         else
@@ -51,14 +50,15 @@ public class PlayerDeathHandler : MonoBehaviour
             if (animator != null && HasParameter("death", animator))
                 animator.SetTrigger("death");
 
-            StartCoroutine(ReloadScene());
+            StartCoroutine(TriggerGameOver());
         }
     }
 
-    IEnumerator ReloadScene()
+    // Ölüm animasyonu tamamlanana kadar bekler, sonra Game Over ekranını açar.
+    IEnumerator TriggerGameOver()
     {
-        yield return new WaitForSeconds(reloadDelay);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        yield return new WaitForSecondsRealtime(reloadDelay);
+        GameOverManager.Instance?.ShowGameOver();
     }
 
     // Animator'da parametre var mı kontrol et (hata almamak için)
