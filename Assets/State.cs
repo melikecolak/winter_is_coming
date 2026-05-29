@@ -34,7 +34,7 @@ public class State
 
     protected void ApplyGravity()
     {
-        if (character.controller.isGrounded && character.playerVelocity.y < 0f)
+        if (character.IsGroundedWithGrace() && character.playerVelocity.y < 0f)
             character.playerVelocity.y = -2f;
 
         character.playerVelocity.y += character.gravity * Time.deltaTime;

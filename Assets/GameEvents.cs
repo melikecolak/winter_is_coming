@@ -15,4 +15,9 @@ public static class GameEvents
     public static event Action OnPlayerDied;
 
     internal static void RaisePlayerDied() => OnPlayerDied?.Invoke();
+
+    // Fired when the last living enemy dies — triggers Victory screen.
+    public static event Action OnAllEnemiesDied;
+
+    internal static void RaiseAllEnemiesDied() => OnAllEnemiesDied?.Invoke();
 }

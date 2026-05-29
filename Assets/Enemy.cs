@@ -1,12 +1,27 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
+    // ── Living-enemy counter ─────────────────────────────────────────────
+    static int livingCount;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void Init()
+    {
+        livingCount = 0;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    static void OnSceneLoaded(Scene scene, LoadSceneMode mode) => livingCount = 0;
+
+    // ── Fields ───────────────────────────────────────────────────────────
     [SerializeField] float health = 100f;
     [SerializeField] GameObject hitVFXPrefab;
-    [SerializeField] GameObject ragdoll;
+    [SerializeField] GameObject ragdoll; // Artık kullanılmıyor, diriliş sistemiyle uyumsuz
 
     [Header("Combat")]
     [SerializeField] float attackCD       = 3f;
@@ -16,7 +31,14 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] float rotationSpeed  = 6f;
     [SerializeField] float stoppingDist   = 2f;
 
-    public bool IsDead => health <= 0;
+    [Header("Resurrection")]
+    [SerializeField] float resurrectDelay = 15f;
+
+    public bool IsDead   => health <= 0f;
+    public bool IsBurned => isBurned;
+
+    bool  isBurned = false;
+    float maxHealth;
 
     GameObject   player;
     NavMeshAgent agent;
@@ -30,13 +52,16 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Start()
     {
+        livingCount++;
+        maxHealth = health;
+
         agent    = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         player   = GameObject.FindGameObjectWithTag("Player");
 
-        agent.updateRotation      = false;
-        agent.stoppingDistance    = stoppingDist;
-        agent.avoidancePriority   = Random.Range(30, 70);
+        agent.updateRotation    = false;
+        agent.stoppingDistance  = stoppingDist;
+        agent.avoidancePriority = Random.Range(30, 70);
     }
 
     void Update()
@@ -124,8 +149,6 @@ public class Enemy : MonoBehaviour, IDamageable
     void OnPlayerDied()
     {
         if (IsDead) return;
-
-        // Stop any in-progress attack coroutine and damage window.
         StopAllCoroutines();
         GetComponentInChildren<EnemyDamageDealer>()?.EndDealDamage();
         isAttacking     = false;
@@ -133,14 +156,10 @@ public class Enemy : MonoBehaviour, IDamageable
         agent.ResetPath();
         animator.SetFloat("speed", 0f);
         animator.ResetTrigger("attack");
-
-        // TODO (multiplayer): call FindNextTarget() here instead of nulling player.
-        // FindNextTarget() should scan for other living players and assign one;
-        // only go idle when none remain.
         player = null;
     }
 
-    // ── Animation Events ────────────────────────────────────────────────
+    // ── Animation Events ─────────────────────────────────────────────────
 
     public void StartDealDamage() =>
         GetComponentInChildren<EnemyDamageDealer>()?.StartDealDamage(attackRange);
@@ -152,7 +171,7 @@ public class Enemy : MonoBehaviour, IDamageable
         ResumeAfterAttack();
     }
 
-    // ── IDamageable ─────────────────────────────────────────────────────
+    // ── IDamageable ──────────────────────────────────────────────────────
 
     public void TakeDamage(float amount)
     {
@@ -170,26 +189,70 @@ public class Enemy : MonoBehaviour, IDamageable
         Destroy(vfx, 3f);
     }
 
+    // ── Death & Resurrection ─────────────────────────────────────────────
+
     void Die()
     {
-        StopAllCoroutines();
+        livingCount--;
 
-        if (ragdoll != null)
-        {
-            var r = Instantiate(ragdoll, transform.position, transform.rotation);
-            Destroy(r, 7f);
-            Destroy(gameObject);
-        }
-        else
-        {
-            // Ragdoll atanmamışsa eski yol: death animasyonu + gecikmiş destroy
-            agent.isStopped = true;
-            agent.enabled = false;
-            GetComponent<CapsuleCollider>().enabled = false;
-            animator.SetTrigger("death");
-            Destroy(gameObject, 9.2f);
-        }
+        StopAllCoroutines();
+        isAttacking     = false;
+        agent.isStopped = true;
+        agent.enabled   = false;
+
+        // Trigger'a çevir: player ceset üzerinden geçebilsin ve yakma etkileşimi çalışsın
+        var col = GetComponent<CapsuleCollider>();
+        if (col != null) col.isTrigger = true;
+
+        animator.SetTrigger("death");
+
+        if (livingCount <= 0)
+            GameEvents.RaiseAllEnemiesDied();
+
+        StartCoroutine(ResurrectionCountdown());
     }
+
+    IEnumerator ResurrectionCountdown()
+    {
+        yield return new WaitForSeconds(resurrectDelay);
+        if (!isBurned) Resurrect();
+    }
+
+    void Resurrect()
+    {
+        health = maxHealth * 0.5f;
+        livingCount++;
+
+        var col = GetComponent<CapsuleCollider>();
+        if (col != null) col.isTrigger = false;
+
+        agent.enabled   = true;
+        agent.isStopped = false;
+        isAttacking     = false;
+        attackTimer     = 0f;
+        destTimer       = 0.5f;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        animator.SetTrigger("resurrect");
+    }
+
+    // ── Burning (InteractionSystem tarafından çağrılır) ──────────────────
+
+    public void Burn()
+    {
+        if (isBurned) return;
+        isBurned = true;
+        StopAllCoroutines(); // diriliş sayacını iptal et
+        StartCoroutine(BurnSequence());
+    }
+
+    IEnumerator BurnSequence()
+    {
+        yield return new WaitForSeconds(4f);
+        Destroy(gameObject);
+    }
+
+    // ── Gizmos ───────────────────────────────────────────────────────────
 
     void OnDrawGizmosSelected()
     {
