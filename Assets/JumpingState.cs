@@ -24,7 +24,7 @@ public class JumpingState : State
 
     public override void LogicUpdate()
     {
-        if (character.controller.isGrounded && character.playerVelocity.y <= 0f)
+        if (character.IsGroundedWithGrace() && character.playerVelocity.y <= 0f)
         {
             animator.SetFloat("verticalVelocity", 0f);
             stateMachine.ChangeState(character.standing);
