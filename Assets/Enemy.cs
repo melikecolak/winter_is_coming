@@ -1,9 +1,24 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
+    // ── Living-enemy counter ─────────────────────────────────────────────
+    static int livingCount;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void Init()
+    {
+        livingCount = 0;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    static void OnSceneLoaded(Scene scene, LoadSceneMode mode) => livingCount = 0;
+
+    // ── Fields ───────────────────────────────────────────────────────────
     [SerializeField] float health = 100f;
     [SerializeField] GameObject hitVFXPrefab;
     [SerializeField] GameObject ragdoll;
@@ -30,6 +45,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Start()
     {
+        livingCount++;
+
         agent    = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         player   = GameObject.FindGameObjectWithTag("Player");
@@ -172,6 +189,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Die()
     {
+        livingCount--;
+        bool allDefeated = livingCount <= 0;
+
         StopAllCoroutines();
 
         if (ragdoll != null)
@@ -189,6 +209,9 @@ public class Enemy : MonoBehaviour, IDamageable
             animator.SetTrigger("death");
             Destroy(gameObject, 9.2f);
         }
+
+        if (allDefeated)
+            GameEvents.RaiseAllEnemiesDied();
     }
 
     void OnDrawGizmosSelected()
