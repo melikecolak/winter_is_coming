@@ -26,6 +26,11 @@ public class Character : MonoBehaviour
     public float sprintStepInterval = 0.1f;
     public LayerMask groundLayer;
 
+    [Header("Ground Check")]
+    public LayerMask groundLayers;
+    [SerializeField] float groundCheckOffset = 0.1f;  // transform.position'dan yukarı offset
+    [SerializeField] float groundCheckRadius = 0.28f; // küre yarıçapı
+
     [HideInInspector] public float gravity;
     [HideInInspector] public float normalColliderHeight;
     [HideInInspector] public Vector3 normalCenter;
@@ -37,6 +42,9 @@ public class Character : MonoBehaviour
     [HideInInspector] public Transform playerModel;
     [HideInInspector] public AudioSource audioSource;
     [HideInInspector] public float stepTimer;
+
+    float lastGroundedTime;
+    const float groundGracePeriod = 0.1f;
 
     public StateMachine movementSM;
     public StandingState standing;
@@ -78,8 +86,26 @@ public class Character : MonoBehaviour
 
     void Update()
     {
+        if (IsGrounded()) lastGroundedTime = Time.time;
+
         movementSM.currentState.HandleInput();
         movementSM.currentState.LogicUpdate();
         movementSM.currentState.PhysicsUpdate();
+    }
+
+    public bool IsGrounded()
+    {
+        Vector3 spherePos = transform.position + Vector3.up * groundCheckOffset;
+        return Physics.CheckSphere(spherePos, groundCheckRadius, groundLayers, QueryTriggerInteraction.Ignore);
+    }
+
+    // Grace period: son grounded anından bu yana 0.1s'den azsa hâlâ grounded say
+    public bool IsGroundedWithGrace() =>
+        IsGrounded() || (Time.time - lastGroundedTime < groundGracePeriod);
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position + Vector3.up * groundCheckOffset, groundCheckRadius);
     }
 }
