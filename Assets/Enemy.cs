@@ -34,6 +34,10 @@ public class Enemy : MonoBehaviour, IDamageable
     [Header("Resurrection")]
     [SerializeField] float resurrectDelay = 15f;
 
+    [Header("Ses")]
+    [SerializeField] AudioClip  zombieDyingClip;
+    [SerializeField] [Range(0f, 3f)] float zombieDyingVolume = 1.5f;
+
     public bool IsDead   => health <= 0f;
     public bool IsBurned => isBurned;
 
@@ -248,7 +252,14 @@ public class Enemy : MonoBehaviour, IDamageable
 
     IEnumerator BurnSequence()
     {
-        yield return new WaitForSeconds(4f);
+        if (zombieDyingClip != null)
+        {
+            var src = gameObject.AddComponent<AudioSource>();
+            src.spatialBlend = 1f;
+            src.playOnAwake  = false;
+            src.PlayOneShot(zombieDyingClip, zombieDyingVolume);
+        }
+        yield return new WaitForSeconds(8f);
         Destroy(gameObject);
     }
 
