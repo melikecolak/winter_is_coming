@@ -14,7 +14,13 @@ public class Health : MonoBehaviour, IDamageable
     public UnityEvent onDeath;
     public UnityEvent<float, float> onHealthChanged;
 
-    Animator animator;
+    [Header("Ses")]
+    [SerializeField] AudioClip damage0Clip;
+    [SerializeField] AudioClip damage1Clip;
+
+    Animator     animator;
+    AudioSource  audioSource;
+    int          damageClipIndex;
     bool isDead;
 
     public bool IsDead        => isDead;
@@ -24,7 +30,15 @@ public class Health : MonoBehaviour, IDamageable
     void Awake()
     {
         currentHealth = maxHealth;
-        animator = GetComponentInChildren<Animator>();
+        animator      = GetComponentInChildren<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource              = gameObject.AddComponent<AudioSource>();
+            audioSource.spatialBlend = 0f;
+            audioSource.playOnAwake  = false;
+        }
     }
 
     public void TakeDamage(float amount)
@@ -33,8 +47,16 @@ public class Health : MonoBehaviour, IDamageable
         currentHealth = Mathf.Clamp(currentHealth - amount, 0f, maxHealth);
         onHealthChanged?.Invoke(currentHealth, maxHealth);
         CameraShake.Instance?.ShakeCamera(2f, 0.2f);
+        PlayDamageSound();
         if (currentHealth <= 0f) { Die(); return; }
         animator?.SetTrigger("damage");
+    }
+
+    void PlayDamageSound()
+    {
+        AudioClip clip = (damageClipIndex % 2 == 0) ? damage0Clip : damage1Clip;
+        damageClipIndex++;
+        if (clip != null) audioSource.PlayOneShot(clip);
     }
 
     public void HitVFX(Vector3 hitPosition)
